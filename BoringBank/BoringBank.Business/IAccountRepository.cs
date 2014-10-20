@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using BoringBank.Business.Domain;
 
-namespace BoringBank.Data
+namespace BoringBank.Business
 {
     public interface IAccountRepository
     {

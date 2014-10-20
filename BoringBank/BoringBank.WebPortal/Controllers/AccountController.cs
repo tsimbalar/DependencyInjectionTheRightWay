@@ -17,11 +17,6 @@ namespace BoringBank.WebPortal.Controllers
             if (userAccountService == null) throw new ArgumentNullException("userAccountService");
             _userAccountService = userAccountService;
         }
-
-        public AccountController()
-            : this(new UserAccountService())
-        {
-        }
         
 
         #region Dependency Management

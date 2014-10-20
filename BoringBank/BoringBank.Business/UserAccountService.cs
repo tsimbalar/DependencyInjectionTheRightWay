@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using BoringBank.Data;
+using BoringBank.Business.Domain;
 
 namespace BoringBank.Business
 {
@@ -15,11 +14,6 @@ namespace BoringBank.Business
             _accountRepository = accountRepository;
         }
 
-        public UserAccountService()
-            :this(new AccountRepository("BankingContext"))
-        {
-        }
-
         #region Dependency Management
 
         public IAccountRepository AccountRepository { get { return _accountRepository; } }
@@ -28,7 +22,7 @@ namespace BoringBank.Business
 
         public IReadOnlyList<Domain.Account> GetAccountsForCustomer(int customerId)
         {
-            return AccountRepository.GetAccountsForCustomer(customerId).Select(ToDomain).ToList().AsReadOnly();
+            return AccountRepository.GetAccountsForCustomer(customerId);
         }
 
         public void RenameAccount(int customerId, int accountId, string newAccountName)
@@ -36,7 +30,7 @@ namespace BoringBank.Business
             // TODO : validate arguments ...
             var account = AccountRepository.GetAccountForCustomer(customerId, accountId);
 
-            account.Title = newAccountName;
+            account.Name = newAccountName;
 
             AccountRepository.Update(account);
         }
@@ -48,7 +42,7 @@ namespace BoringBank.Business
                           {
                               Balance = 0m,
                               CustomerId = userId,
-                              Title = accountName
+                              Name = accountName
                           };
             AccountRepository.Add(account);
 
@@ -66,17 +60,6 @@ namespace BoringBank.Business
 
             AccountRepository.Update(fromAccount);
             AccountRepository.Update(toAccount);
-        }
-
-        private static Domain.Account ToDomain(Account ac)
-        {
-            return new Domain.Account
-                   {
-                       Balance = ac.Balance,
-                       CustomerId = ac.CustomerId,
-                       Id = ac.Id,
-                       Name = ac.Title
-                   };
         }
     }
 }

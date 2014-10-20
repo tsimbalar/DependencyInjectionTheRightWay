@@ -1,4 +1,4 @@
-﻿using BoringBank.Data;
+﻿using BoringBank.Business.Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Ploeh.AutoFixture;
@@ -14,7 +14,7 @@ namespace BoringBank.Business.Tests
         {
             // Arrange		
             var newName = "someName";
-            
+
             var existingAccount = AnAccount();
             var mockRepo = new Mock<IAccountRepository>();
             mockRepo.Setup(r => r.GetAccountForCustomer(It.IsAny<int>(), It.IsAny<int>()))
@@ -25,13 +25,13 @@ namespace BoringBank.Business.Tests
             sut.RenameAccount(existingAccount.CustomerId, existingAccount.Id, newName);
 
             // Assert		
-            mockRepo.Verify(r=> r.Update(It.Is<Data.Account>(a=> a.Title == newName)));
+            mockRepo.Verify(r => r.Update(It.Is<Account>(a => a.Name == newName)));
         }
 
-        private Data.Account AnAccount()
+        private Account AnAccount()
         {
             var fixture = new Fixture();
-            return fixture.Create<Data.Account>();
+            return fixture.Create<Account>();
         }
     }
 }

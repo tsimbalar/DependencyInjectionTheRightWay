@@ -59,10 +59,6 @@
       <Project>{331A55BE-4603-4392-AE50-64996D97DF06}</Project>
       <Name>BoringBank.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BoringBank.Data\BoringBank.Data.csproj">
-      <Project>{61e8a282-9a87-454f-bc86-4b9bd0c48590}</Project>
-      <Name>BoringBank.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
