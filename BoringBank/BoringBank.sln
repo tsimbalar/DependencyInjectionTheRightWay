@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{95667F40-5BFD-4F57-923E-AEDB3201B5EC}"
 	ProjectSection(SolutionItems) = preProject
 		DependencyDiagram-assemblysplitting.dgml = DependencyDiagram-assemblysplitting.dgml
+		DependencyDiagram-constructorinjection.dgml = DependencyDiagram-constructorinjection.dgml
 		DependencyDiagram-introductinginterfaces.dgml = DependencyDiagram-introductinginterfaces.dgml
 	EndProjectSection
 EndProject
