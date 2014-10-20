@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architectur
 		DependencyDiagram-assemblysplitting.dgml = DependencyDiagram-assemblysplitting.dgml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoringBank.Business.Tests", "BoringBank.Business.Tests\BoringBank.Business.Tests.csproj", "{8186AB9D-DE61-45AE-98B6-BA05EECAED81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{61E8A282-9A87-454F-BC86-4B9BD0C48590}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61E8A282-9A87-454F-BC86-4B9BD0C48590}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61E8A282-9A87-454F-BC86-4B9BD0C48590}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8186AB9D-DE61-45AE-98B6-BA05EECAED81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8186AB9D-DE61-45AE-98B6-BA05EECAED81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8186AB9D-DE61-45AE-98B6-BA05EECAED81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8186AB9D-DE61-45AE-98B6-BA05EECAED81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

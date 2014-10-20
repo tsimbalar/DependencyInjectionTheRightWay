@@ -5,11 +5,18 @@ namespace BoringBank.Data
 {
     public class AccountRepository
     {
+        private readonly string _connectionString;
+
+        public AccountRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public IReadOnlyList<Account> GetAccountsForCustomer(int userId)
         {
-            using (var context = new BankingDbContext("BankingDbContext"))
+            using (var context = new BankingDbContext(_connectionString))
             {
-                var accounts = Queryable.Where<Account>(context.Accounts, a => a.CustomerId == userId)
+                var accounts = context.Accounts.Where(a => a.CustomerId == userId)
                     .OrderBy(a => a.Title).ToList();
 
                 return accounts.AsReadOnly();
@@ -20,7 +27,7 @@ namespace BoringBank.Data
 
         public Account GetAccountForCustomer(int customerId, int accountId)
         {
-            using (var context = new BankingDbContext("BankingDbContext"))
+            using (var context = new BankingDbContext(_connectionString))
             {
                 var account = context.Accounts
                     .Single(a => a.CustomerId == customerId && a.Id == accountId);
@@ -31,7 +38,7 @@ namespace BoringBank.Data
 
         public void Update(Account account)
         {
-            using (var context = new BankingDbContext("BankingDbContext"))
+            using (var context = new BankingDbContext(_connectionString))
             {
                 var accountEf = context.Accounts.Find(account.Id);
                 // theoretically, could do "if not changed"
@@ -44,7 +51,7 @@ namespace BoringBank.Data
 
         public void Add(Account account)
         {
-            using (var context = new BankingDbContext("BankingDbContext"))
+            using (var context = new BankingDbContext(_connectionString))
             {
                 //var accountToAdd = NewFromDomain(account);
                 context.Accounts.Add(account);

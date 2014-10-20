@@ -9,14 +9,22 @@ namespace BoringBank.WebPortal.Controllers
 {
     public class AccountController : BaseController
     {
+        public AccountController()
+        {
+            UserAccountService = new UserAccountService();
+        }
+
+        #region Dependency Management
+        public UserAccountService UserAccountService { get; set; }
+        #endregion
+
         // GET: Account
         [HttpGet]
         public ActionResult Index()
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            var userAccountService = new UserAccountService();
-            var accounts = userAccountService.GetAccountsForCustomer(userId);
+            var accounts = UserAccountService.GetAccountsForCustomer(userId);
 
             return View(ToViewModel(accounts));
         }
@@ -27,8 +35,7 @@ namespace BoringBank.WebPortal.Controllers
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            var userAccountService = new UserAccountService();
-            userAccountService.RenameAccount(userId, id, newName);
+            UserAccountService.RenameAccount(userId, id, newName);
 
             // done ... redirect ...
             return RedirectToAction("Index");
@@ -38,8 +45,7 @@ namespace BoringBank.WebPortal.Controllers
         public ActionResult Add(string name)
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
-            var userAccountService = new UserAccountService();
-            userAccountService.CreateAccountForCustomer(userId, name);
+            UserAccountService.CreateAccountForCustomer(userId, name);
 
             // done ... redirect ...
             return RedirectToAction("Index");
@@ -49,9 +55,7 @@ namespace BoringBank.WebPortal.Controllers
         public ActionResult Transfer()
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
-
-            var userAccountService = new UserAccountService();
-            var allUserAccounts = userAccountService.GetAccountsForCustomer(userId);
+            var allUserAccounts = UserAccountService.GetAccountsForCustomer(userId);
 
             return View(ToViewModel(allUserAccounts));
         }
@@ -61,8 +65,7 @@ namespace BoringBank.WebPortal.Controllers
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            var userAccountService = new UserAccountService();
-            userAccountService.Transfer(userId, from, to, amount);
+            UserAccountService.Transfer(userId, from, to, amount);
 
             return RedirectToAction("Index");
         }

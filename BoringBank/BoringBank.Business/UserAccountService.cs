@@ -6,22 +6,30 @@ namespace BoringBank.Business
 {
     public class UserAccountService
     {
+        public UserAccountService()
+        {
+            AccountRepository = new AccountRepository("BankingContext");
+        }
+
+        #region Dependency Management
+
+        public AccountRepository AccountRepository { get; set; }
+
+        #endregion
+
         public IReadOnlyList<Domain.Account> GetAccountsForCustomer(int customerId)
         {
-            var accountRepository = new AccountRepository();
-
-            return accountRepository.GetAccountsForCustomer(customerId).Select(ToDomain).ToList().AsReadOnly();
+            return AccountRepository.GetAccountsForCustomer(customerId).Select(ToDomain).ToList().AsReadOnly();
         }
 
         public void RenameAccount(int customerId, int accountId, string newAccountName)
         {
             // TODO : validate arguments ...
-            var accountRepository = new AccountRepository();
-            var account = accountRepository.GetAccountForCustomer(customerId, accountId);
+            var account = AccountRepository.GetAccountForCustomer(customerId, accountId);
 
             account.Title = newAccountName;
 
-            accountRepository.Update(account);
+            AccountRepository.Update(account);
         }
 
         public void CreateAccountForCustomer(int userId, string accountName)
@@ -33,25 +41,22 @@ namespace BoringBank.Business
                               CustomerId = userId,
                               Title = accountName
                           };
-
-            var accountRepository = new AccountRepository();
-            accountRepository.Add(account);
+            AccountRepository.Add(account);
 
         }
 
         public void Transfer(int userId, int fromAccountId, int toAccountId, decimal amountToTransfer)
         {
             // TODO : validate arguments
-            var accountRepository = new AccountRepository();
-            var fromAccount = accountRepository.GetAccountForCustomer(userId, fromAccountId);
-            var toAccount = accountRepository.GetAccountForCustomer(userId, toAccountId);
+            var fromAccount = AccountRepository.GetAccountForCustomer(userId, fromAccountId);
+            var toAccount = AccountRepository.GetAccountForCustomer(userId, toAccountId);
 
             // TODO : verify that there is enough money
             fromAccount.Balance -= amountToTransfer;
             toAccount.Balance += amountToTransfer;
 
-            accountRepository.Update(fromAccount);
-            accountRepository.Update(toAccount);
+            AccountRepository.Update(fromAccount);
+            AccountRepository.Update(toAccount);
         }
 
         private static Domain.Account ToDomain(Account ac)
