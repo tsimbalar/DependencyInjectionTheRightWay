@@ -1,0 +1,21 @@
+﻿@model List<BoringBank.WebPortal.Data.Account>
+@{
+    ViewBag.Title = "Transfer money";
+}
+
+<h1>@ViewBag.Title</h1>
+<div>
+    @using (Html.BeginForm("TransferPost", "Account"))
+    {
+        <text>From:</text>
+        @Html.DropDownList("from", new SelectList(Model, "Id", "Title", null))
+        <text>To:</text>
+        @Html.DropDownList("to", new SelectList(Model, "Id", "Title", null))
+        <br/>
+        <text>Amount:</text>
+        @Html.TextBox("amount", 0)
+        <br/>
+        <button type="submit">Send !</button>
+
+    }
+</div>

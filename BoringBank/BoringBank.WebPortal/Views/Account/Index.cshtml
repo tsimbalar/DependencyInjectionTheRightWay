@@ -1,0 +1,37 @@
+﻿@model List<BoringBank.WebPortal.Data.Account>
+@{
+    ViewBag.Title = "Your accounts";
+}
+
+<h1>@ViewBag.Title</h1>
+<div class="pull-right">
+    @using (Html.BeginForm("Add", "Account"))
+    {
+        @Html.TextBox("name","")
+        <button type="submit">Add</button>
+    }
+</div>
+<table class="table">
+    <thead>
+    <th>Name</th>
+    <th>Balance</th>
+    </thead>
+    <tbody>
+        @foreach (var ac in Model)
+        {
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Rename", "Account", new { id = ac.Id }))
+                    {
+                        @Html.TextBox("newName", ac.Title)
+                        <button type="submit">rename</button>
+                    }
+                </td>
+                <td>
+                    @ac.Balance.ToString("C")
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
