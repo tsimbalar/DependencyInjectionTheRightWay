@@ -13,43 +13,14 @@ namespace BoringBank.WebPortal
     {
         protected void Application_Start()
         {
-            //this.PreRequestHandlerExecute += MvcApplication_PreRequestHandlerExecute;
+            var factory = new AppCompositionRoot();
+            ControllerBuilder.Current.SetControllerFactory(factory);
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
-
-        void MvcApplication_PreRequestHandlerExecute(object sender, EventArgs e)
-        {
-            this.Context.User = new ClaimsPrincipal(
-                new ClaimsIdentity(new []
-                                   {
-                                       new Claim(ClaimTypes.NameIdentifier, "1", ClaimValueTypes.Integer32),
-                                       new Claim(ClaimTypes.Email, "tibo.desodt@gmail.com"),
-                                       new Claim(ClaimTypes.Name, "tsimbalar"),
-                                       new Claim(ClaimTypes.GivenName, "Thibaud"),
-                                       new Claim(ClaimTypes.Surname, "Desodt"),
-                                   }));
-        }
-
-        //void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
-        //{
-
-        //    this.Context.User = new ClaimsPrincipal(
-        //         new ClaimsIdentity(new Claim[]
-        //                           {
-        //                               new Claim(ClaimTypes.NameIdentifier, "1", ClaimValueTypes.Integer32),
-        //                               new Claim(ClaimTypes.Email, "tibo.desodt@gmail.com"),
-        //                               new Claim(ClaimTypes.Name, "tsimbalar"),
-        //                               new Claim(ClaimTypes.GivenName, "Thibaud"),
-        //                               new Claim(ClaimTypes.Surname, "Desodt"),
-        //                           }));
-        //}
-
-
-
-
     }
 }

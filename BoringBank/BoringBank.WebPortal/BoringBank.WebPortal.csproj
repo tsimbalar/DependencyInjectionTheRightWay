@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\AppCompositionRoot.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -180,6 +181,10 @@
     <ProjectReference Include="..\BoringBank.Business\BoringBank.Business.csproj">
       <Project>{331a55be-4603-4392-ae50-64996d97df06}</Project>
       <Name>BoringBank.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoringBank.Data\BoringBank.Data.csproj">
+      <Project>{61e8a282-9a87-454f-bc86-4b9bd0c48590}</Project>
+      <Name>BoringBank.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
