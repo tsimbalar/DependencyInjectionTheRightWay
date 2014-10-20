@@ -29,7 +29,7 @@ namespace BoringBank.WebPortal
             }
 
             // standard way in MVC to use default strategy
-            return null;
+            return base.GetControllerInstance(requestContext, controllerType);
         }
     }
 }
