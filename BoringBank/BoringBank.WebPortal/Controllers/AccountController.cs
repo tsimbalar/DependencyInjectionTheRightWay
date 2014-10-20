@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using BoringBank.WebPortal.Domain;
+using BoringBank.Business;
+using BoringBank.Business.Domain;
 using BoringBank.WebPortal.Models;
 
 namespace BoringBank.WebPortal.Controllers

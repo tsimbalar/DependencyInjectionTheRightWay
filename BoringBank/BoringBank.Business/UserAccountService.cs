@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using BoringBank.WebPortal.Data;
+using System.Linq;
+using BoringBank.Data;
 
-namespace BoringBank.WebPortal.Controllers
+namespace BoringBank.Business
 {
     public class UserAccountService
     {
@@ -9,7 +10,7 @@ namespace BoringBank.WebPortal.Controllers
         {
             var accountRepository = new AccountRepository();
 
-            return accountRepository.GetAccountsForCustomer(customerId);
+            return accountRepository.GetAccountsForCustomer(customerId).Select(ToDomain).ToList().AsReadOnly();
         }
 
         public void RenameAccount(int customerId, int accountId, string newAccountName)
@@ -18,7 +19,7 @@ namespace BoringBank.WebPortal.Controllers
             var accountRepository = new AccountRepository();
             var account = accountRepository.GetAccountForCustomer(customerId, accountId);
 
-            account.Name = newAccountName;
+            account.Title = newAccountName;
 
             accountRepository.Update(account);
         }
@@ -26,11 +27,11 @@ namespace BoringBank.WebPortal.Controllers
         public void CreateAccountForCustomer(int userId, string accountName)
         {
             // TODO : validate arguments
-            var account = new Domain.Account()
+            var account = new Account()
                           {
                               Balance = 0m,
                               CustomerId = userId,
-                              Name = accountName
+                              Title = accountName
                           };
 
             var accountRepository = new AccountRepository();
@@ -51,6 +52,17 @@ namespace BoringBank.WebPortal.Controllers
 
             accountRepository.Update(fromAccount);
             accountRepository.Update(toAccount);
+        }
+
+        private static Domain.Account ToDomain(Account ac)
+        {
+            return new Domain.Account
+                   {
+                       Balance = ac.Balance,
+                       CustomerId = ac.CustomerId,
+                       Id = ac.Id,
+                       Name = ac.Title
+                   };
         }
     }
 }

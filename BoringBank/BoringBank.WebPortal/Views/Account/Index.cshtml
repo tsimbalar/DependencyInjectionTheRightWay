@@ -1,4 +1,4 @@
-﻿@model List<BoringBank.WebPortal.Data.Account>
+﻿@model BoringBank.WebPortal.Models.UserAccountListViewModel
 @{
     ViewBag.Title = "Your accounts";
 }
@@ -17,13 +17,13 @@
     <th>Balance</th>
     </thead>
     <tbody>
-        @foreach (var ac in Model)
+        @foreach (var ac in Model.Accounts)
         {
             <tr>
                 <td>
                     @using (Html.BeginForm("Rename", "Account", new { id = ac.Id }))
                     {
-                        @Html.TextBox("newName", ac.Title)
+                        @Html.TextBox("newName", ac.Name)
                         <button type="submit">rename</button>
                     }
                 </td>

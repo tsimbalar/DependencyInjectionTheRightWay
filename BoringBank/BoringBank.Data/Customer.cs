@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BoringBank.WebPortal.Data
+namespace BoringBank.Data
 {
     public class Customer
     {

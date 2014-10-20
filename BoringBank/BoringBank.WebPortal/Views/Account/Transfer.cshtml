@@ -1,4 +1,4 @@
-﻿@model List<BoringBank.WebPortal.Data.Account>
+﻿@model BoringBank.WebPortal.Models.UserAccountListViewModel
 @{
     ViewBag.Title = "Transfer money";
 }
@@ -8,9 +8,9 @@
     @using (Html.BeginForm("TransferPost", "Account"))
     {
         <text>From:</text>
-        @Html.DropDownList("from", new SelectList(Model, "Id", "Title", null))
+        @Html.DropDownList("from", new SelectList(Model.Accounts, "Id", "Name", null))
         <text>To:</text>
-        @Html.DropDownList("to", new SelectList(Model, "Id", "Title", null))
+        @Html.DropDownList("to", new SelectList(Model.Accounts, "Id", "Name", null))
         <br/>
         <text>Amount:</text>
         @Html.TextBox("amount", 0)

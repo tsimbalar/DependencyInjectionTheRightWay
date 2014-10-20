@@ -1,4 +1,4 @@
-﻿namespace BoringBank.WebPortal.Domain
+﻿namespace BoringBank.Business.Domain
 {
     public class Account
     {

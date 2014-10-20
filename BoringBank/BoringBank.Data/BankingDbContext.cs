@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 
-namespace BoringBank.WebPortal.Data
+namespace BoringBank.Data
 {
     public class BankingDbContext : DbContext
     {

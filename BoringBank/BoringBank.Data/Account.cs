@@ -1,4 +1,4 @@
-﻿namespace BoringBank.WebPortal.Data
+﻿namespace BoringBank.Data
 {
     public class Account
     {
