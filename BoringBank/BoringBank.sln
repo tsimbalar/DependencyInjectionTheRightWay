@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{95667F40-5BFD-4F57-923E-AEDB3201B5EC}"
 	ProjectSection(SolutionItems) = preProject
 		DependencyDiagram-assemblysplitting.dgml = DependencyDiagram-assemblysplitting.dgml
+		DependencyDiagram-introductinginterfaces.dgml = DependencyDiagram-introductinginterfaces.dgml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoringBank.Business.Tests", "BoringBank.Business.Tests\BoringBank.Business.Tests.csproj", "{8186AB9D-DE61-45AE-98B6-BA05EECAED81}"

@@ -15,7 +15,7 @@ namespace BoringBank.WebPortal.Controllers
         }
 
         #region Dependency Management
-        public UserAccountService UserAccountService { get; set; }
+        public IUserAccountService UserAccountService { get; set; }
         #endregion
 
         // GET: Account

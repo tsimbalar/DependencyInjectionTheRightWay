@@ -50,6 +50,7 @@
     <Compile Include="AccountRepository.cs" />
     <Compile Include="BankingDbContext.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="IAccountRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

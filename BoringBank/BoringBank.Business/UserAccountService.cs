@@ -4,7 +4,7 @@ using BoringBank.Data;
 
 namespace BoringBank.Business
 {
-    public class UserAccountService
+    public class UserAccountService : IUserAccountService
     {
         public UserAccountService()
         {
@@ -13,7 +13,7 @@ namespace BoringBank.Business
 
         #region Dependency Management
 
-        public AccountRepository AccountRepository { get; set; }
+        public IAccountRepository AccountRepository { get; set; }
 
         #endregion
 

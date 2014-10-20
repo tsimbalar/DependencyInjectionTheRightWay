@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BoringBank.Data
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly string _connectionString;
 
