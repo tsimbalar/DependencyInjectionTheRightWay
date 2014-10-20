@@ -70,11 +70,11 @@ namespace BoringBank.WebPortal.Controllers
 
             using (var context = new BankingDbContext())
             {
-                var accounts = context.Accounts
+                var allUserAccounts = context.Accounts
                     .Where(a => a.CustomerId == userId)
                     .OrderBy(a => a.Title).ToList();
 
-                return View(accounts);
+                return View(allUserAccounts);
             }
         }
 
