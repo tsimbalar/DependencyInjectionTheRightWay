@@ -18,9 +18,12 @@ namespace BoringBank.WebPortal
                 var connectionString = ConfigurationManager.ConnectionStrings["BankingDbContext"]
                     .ConnectionString;
 
-                var repo = new AccountRepository(connectionString);
+                var nakedRepo = new AccountRepository(connectionString);
 
-                var service = new UserAccountService(repo);
+                // decorate the nakedRepository with caching features
+                var longCache = new DotNetCache(TimeSpan.FromHours(1));
+                var cachedRepo = new CachedAccountRepository(longCache, nakedRepo);
+                var service = new UserAccountService(cachedRepo);
 
                 return new AccountController(service);
             }
