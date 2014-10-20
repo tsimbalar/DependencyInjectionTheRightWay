@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BoringBank.WebPortal.Controllers.AccountController">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAEAQAAAAAAAAAAAAEAAAAAgAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoringBank.WebPortal.Data.BankingDbContext">
+    <Position X="6.25" Y="3.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\BankingDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoringBank.WebPortal.Data.Account">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAAAAgAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoringBank.WebPortal.Data.Customer">
+    <Position X="7.25" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAg=</HashCode>
+      <FileName>Data\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

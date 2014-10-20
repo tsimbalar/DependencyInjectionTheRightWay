@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using BoringBank.WebPortal.Data;
+using BoringBank.WebPortal.Domain;
+using BoringBank.WebPortal.Models;
 
 namespace BoringBank.WebPortal.Controllers
 {
@@ -12,55 +14,34 @@ namespace BoringBank.WebPortal.Controllers
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            using (var context = new BankingDbContext())
-            {
-                var accounts = context.Accounts
-                    .Where(a => a.CustomerId == userId)
-                    .OrderBy(a => a.Title).ToList();
+            var userAccountService = new UserAccountService();
+            var accounts = userAccountService.GetAccountsForCustomer(userId);
 
-                return View(accounts);
-            }
+            return View(ToViewModel(accounts));
         }
+
 
         [HttpPost]
         public ActionResult Rename(int id, string newName)
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            using (var context = new BankingDbContext())
-            {
-                var accountToUpdate = context.Accounts
-                    .Single(a => a.CustomerId == userId && a.Id == id);
+            var userAccountService = new UserAccountService();
+            userAccountService.RenameAccount(userId, id, newName);
 
-                accountToUpdate.Title = newName;
-
-                context.SaveChanges();
-
-                // done ... redirect ...
-                return RedirectToAction("Index");
-            }
+            // done ... redirect ...
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult Add(string name)
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
+            var userAccountService = new UserAccountService();
+            userAccountService.CreateAccountForCustomer(userId, name);
 
-            using (var context = new BankingDbContext())
-            {
-                var newAccount = new Account()
-                                 {
-                                     CustomerId = userId,
-                                     Balance = 0.0m,
-                                     Title = name
-                                 };
-                context.Accounts.Add(newAccount);
-
-                context.SaveChanges();
-
-                // done ... redirect ...
-                return RedirectToAction("Index");
-            }
+            // done ... redirect ...
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -68,14 +49,10 @@ namespace BoringBank.WebPortal.Controllers
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            using (var context = new BankingDbContext())
-            {
-                var allUserAccounts = context.Accounts
-                    .Where(a => a.CustomerId == userId)
-                    .OrderBy(a => a.Title).ToList();
+            var userAccountService = new UserAccountService();
+            var allUserAccounts = userAccountService.GetAccountsForCustomer(userId);
 
-                return View(allUserAccounts);
-            }
+            return View(ToViewModel(allUserAccounts));
         }
 
         [HttpPost]
@@ -83,21 +60,24 @@ namespace BoringBank.WebPortal.Controllers
         {
             var userId = this.User.AsClaimsPrincipal().UserId();
 
-            using (var context = new BankingDbContext())
+            var userAccountService = new UserAccountService();
+            userAccountService.Transfer(userId, from, to, amount);
+
+            return RedirectToAction("Index");
+        }
+
+
+        private UserAccountListViewModel ToViewModel(IEnumerable<Account> accounts)
+        {
+            return new UserAccountListViewModel()
             {
-                var accountFrom = context.Accounts
-                    .Single(a => a.CustomerId == userId && a.Id == from);
-                var accountTo = context.Accounts
-                    .Single(a => a.CustomerId == userId && a.Id == to);
-
-                accountFrom.Balance -= amount;
-                accountTo.Balance += amount;
-
-                context.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-
+                Accounts = accounts.Select(a => new UserAccountViewModel()
+                {
+                    Name = a.Name,
+                    Id = a.Id,
+                    Balance = a.Balance
+                }).ToList().AsReadOnly()
+            };
         }
 
 

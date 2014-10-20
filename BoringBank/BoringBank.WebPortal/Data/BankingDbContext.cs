@@ -5,7 +5,7 @@ namespace BoringBank.WebPortal.Data
 {
     public class BankingDbContext : DbContext
     {
-        public BankingDbContext()
+        public BankingDbContext(string connectionString)
             : base("BankingDbContext") 
         {
             Database.SetInitializer<BankingDbContext>(new BankingDbInitializer());
@@ -13,32 +13,6 @@ namespace BoringBank.WebPortal.Data
 
         public IDbSet<Account> Accounts { get; set; }
         public IDbSet<Customer> Customers { get; set; }
-    }
-
-    public class Account
-    {
-        public int Id { get; set; }
-
-        public int CustomerId { get; set; }
-
-        public string Title { get; set; }
-        public decimal Balance { get; set; }
-    }
-
-    public class Customer
-    {
-        public Customer()
-        {
-            Accounts = new List<Account>();
-        }
-
-        public int Id { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public List<Account> Accounts { get; set; } 
     }
 
     public class BankingDbInitializer : DropCreateDatabaseIfModelChanges<BankingDbContext>
