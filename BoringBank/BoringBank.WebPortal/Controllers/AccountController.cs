@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using BoringBank.Business;
@@ -9,13 +10,22 @@ namespace BoringBank.WebPortal.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController()
+        private readonly IUserAccountService _userAccountService;
+
+        public AccountController(IUserAccountService userAccountService)
         {
-            UserAccountService = new UserAccountService();
+            if (userAccountService == null) throw new ArgumentNullException("userAccountService");
+            _userAccountService = userAccountService;
         }
 
+        public AccountController()
+            : this(new UserAccountService())
+        {
+        }
+        
+
         #region Dependency Management
-        public IUserAccountService UserAccountService { get; set; }
+        public IUserAccountService UserAccountService { get { return _userAccountService; } }
         #endregion
 
         // GET: Account

@@ -19,8 +19,7 @@ namespace BoringBank.Business.Tests
             var mockRepo = new Mock<IAccountRepository>();
             mockRepo.Setup(r => r.GetAccountForCustomer(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(existingAccount);
-            var sut = new UserAccountService();
-            sut.AccountRepository = mockRepo.Object; //I want to put a fake here !
+            var sut = new UserAccountService(mockRepo.Object);
 
             // Act
             sut.RenameAccount(existingAccount.CustomerId, existingAccount.Id, newName);

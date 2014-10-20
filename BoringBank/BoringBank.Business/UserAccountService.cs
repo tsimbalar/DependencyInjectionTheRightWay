@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BoringBank.Data;
@@ -6,14 +7,22 @@ namespace BoringBank.Business
 {
     public class UserAccountService : IUserAccountService
     {
-        public UserAccountService()
+        private readonly IAccountRepository _accountRepository;
+
+        public UserAccountService(IAccountRepository accountRepository)
         {
-            AccountRepository = new AccountRepository("BankingContext");
+            if (accountRepository == null) throw new ArgumentNullException("accountRepository");
+            _accountRepository = accountRepository;
+        }
+
+        public UserAccountService()
+            :this(new AccountRepository("BankingContext"))
+        {
         }
 
         #region Dependency Management
 
-        public IAccountRepository AccountRepository { get; set; }
+        public IAccountRepository AccountRepository { get { return _accountRepository; } }
 
         #endregion
 
