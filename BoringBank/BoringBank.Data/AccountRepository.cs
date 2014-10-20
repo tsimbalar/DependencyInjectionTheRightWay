@@ -22,10 +22,10 @@ namespace BoringBank.Data
         {
             using (var context = new BankingDbContext("BankingDbContext"))
             {
-                var account = Queryable.Single<Account>(context.Accounts, a => a.CustomerId == customerId && a.Id == accountId);
+                var account = context.Accounts
+                    .Single(a => a.CustomerId == customerId && a.Id == accountId);
 
                 return account;
-                //return ToDomain(account);
             }
         }
 
