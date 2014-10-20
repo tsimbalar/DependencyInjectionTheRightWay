@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.Practices.Unity;
 
 namespace BoringBank.WebPortal
 {
@@ -8,8 +10,10 @@ namespace BoringBank.WebPortal
     {
         protected void Application_Start()
         {
-            var factory = new AppCompositionRoot();
-            ControllerBuilder.Current.SetControllerFactory(factory);
+            var container = new UnityContainer();
+            DependencyConfig.Configure(container);
+            var compositionRoot = new AppCompositionRoot(container);
+            ControllerBuilder.Current.SetControllerFactory(compositionRoot);
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
